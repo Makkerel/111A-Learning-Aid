@@ -8,9 +8,9 @@ const { frontmatter } = Astro.props;
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 
 const navLinks = [
-  { href: '/', label: '1. Group Axioms' },
-  { href: '/subgroups', label: '2. Subgroups' },
-  { href: '/quotient-groups', label: '3. Quotient Groups' },
+  { href: '/', label: 'Euler Angles' },
+  { href: '/quaternions', label: 'Quaternions' },
+  { href: '/practical-use', label: 'Practical Usecases' },
 ];
 ---
 
@@ -19,7 +19,7 @@ const navLinks = [
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{frontmatter.title} — MATH 111A</title>
+  <title>{frontmatter.title} — MATH 111A Learning Aid</title>
   <Font cssVariable="--font-serif" preload />
   <Font cssVariable="--font-sans" preload />
   <ClientRouter />
@@ -27,7 +27,7 @@ const navLinks = [
 <body>
   <div class="page-shell">
     <header class="site-header">
-      <p class="site-title">MATH 111A — Abstract Algebra</p>
+      <p class="site-title">MATH 111A Learning Aid</p>
       <nav class="site-nav" aria-label="Topics">
         {navLinks.map((link) => (
           <a
@@ -46,7 +46,7 @@ const navLinks = [
     </main>
 
     <footer class="site-footer">
-      Abstract Algebra Study Notes
+      By Kevin Zhao, Jacky Wang, Patrick Cabigo, Winds, Clouds
     </footer>
   </div>
 </body>

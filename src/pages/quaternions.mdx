@@ -1,0 +1,102 @@
+---
+layout: ../layouts/NotesLayout.astro
+title: "Quaternions"
+---
+
+import Quiz from "../components/Quiz.astro";
+
+Euler angles encode a rotation as three numbers and suffer from gimbal lock. Quaternions replace that triple with a single algebraic object — and give a clean map onto $SO(3)$.
+
+> **Definition (Quaternions).** The quaternions are the $4$-dimensional real algebra
+>
+> $$
+> \mathbb{H} = \{ a + bi + cj + dk : a,b,c,d \in \mathbb{R} \}
+> $$
+>
+> with basis $\{1,i,j,k\}$. Multiplication is determined by
+>
+> $$
+> i^2 = j^2 = k^2 = ijk = -1.
+> $$
+
+Real scalars commute with everything, but quaternion multiplication does **not**: $ij = k$ while $ji = -k$.
+
+## Conjugation, Norm, and Inverses
+
+For $q = a + bi + cj + dk$:
+
+$$
+\overline{q} = a - bi - cj - dk,
+\qquad
+|q| = \sqrt{a^2 + b^2 + c^2 + d^2}.
+$$
+
+These satisfy $q\overline{q} = |q|^2$, so every nonzero quaternion has inverse
+
+$$
+q^{-1} = \frac{\overline{q}}{|q|^2}.
+$$
+
+A useful consequence: $|pq| = |p||q|$.
+
+# Unit Quaternions
+
+A **unit quaternion** has $|q| = 1$. Then $q^{-1} = \overline{q}$, and the set
+
+$$
+U = \{ q \in \mathbb{H} : |q| = 1 \}
+$$
+
+is a subgroup of $\mathbb{H}^\times$. Every nonzero $q$ normalizes to $q/|q| \in U$.
+
+## Rotations by Conjugation
+
+In $\mathbb{C}$, a unit complex $z = e^{i\theta}$ rotates the plane by ordinary multiplication: $w \mapsto zw$.
+
+In 3D the analogous move is **conjugation**. Identify a point of $\mathbb{R}^3$ with a pure imaginary quaternion $r = xi + yj + zk$. A unit quaternion $q$ rotates $r$ by
+
+$$
+r \mapsto qrq^{-1}.
+$$
+
+This preserves length:
+
+$$
+|qrq^{-1}| = |q||r||q^{-1}| = |r|.
+$$
+
+Unlike the complex case, conjugation is insensitive to sign:
+
+$$
+(-q)\,r\,(-q)^{-1} = qrq^{-1}.
+$$
+
+So $q$ and $-q$ define the **same** rotation.
+
+## The Double Cover of $SO(3)$
+
+Recall
+
+$$
+SO(3) = \{ P \in O_3 : \det(P) = 1 \},
+$$
+
+the group of orientation-preserving rotations of $\mathbb{R}^3$. Each element of $SO(3)$ is one unique rotation.
+
+Sending a unit quaternion $q$ to the rotation $r \mapsto qrq^{-1}$ gives a surjective homomorphism $U \to SO(3)$. Because $q$ and $-q$ map to the same rotation, the map is **2-to-1**: unit quaternions are a **double cover** of $SO(3)$.
+
+> **Takeaway.** Every 3D rotation corresponds to a pair $\{q,-q\}$ of unit quaternions. That double cover is why quaternions can track orientation continuously without the singularities of Euler angles.
+
+## Quick Quiz
+
+<Quiz
+  question={String.raw`Why do unit quaternions form a double cover of $SO(3)$?`}
+  options={[
+    String.raw`Each rotation corresponds to exactly one quaternion`,
+    String.raw`$q$ and $-q$ induce the same conjugation map $r \mapsto qrq^{-1}$`,
+    String.raw`Quaternion multiplication is commutative`,
+    String.raw`$SO(3)$ has twice as many elements as $U$`,
+  ]}
+  answer={1}
+  explanation={String.raw`$(-q)r(-q)^{-1} = qrq^{-1}$, so each rotation in $SO(3)$ has two unit-quaternion preimages $q$ and $-q$.`}
+/>

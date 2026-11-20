@@ -125,12 +125,14 @@ body {
 .prose h1 {
   font-size: 2rem;
   margin: 0 0 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
 }
 
 .prose h2 {
   font-size: 1.35rem;
   margin: 2.5rem 0 0.85rem;
-  padding-bottom: 0.35rem;
+  padding-bottom: 0.3rem;
   border-bottom: 1px solid var(--border);
 }
 
@@ -205,6 +207,7 @@ body {
 
 .prose details summary::before {
   content: "▸";
+  margin-top: -2px;
   font-size: 0.85rem;
   color: var(--accent);
   transition: transform 0.15s ease;
@@ -262,6 +265,13 @@ body {
 }
 
 /* === KaTeX Polish === */
+.katex .hline {
+  border-bottom-width: 1px !important;
+  border-bottom-style: solid !important;
+  border-bottom-color: currentColor !important;
+  min-width: 100%;
+}
+
 .katex-display {
   overflow-x: auto;
   overflow-y: hidden;
