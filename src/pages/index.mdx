@@ -27,8 +27,8 @@ Therefore every element $a \in G$ has a unique inverse $a^{-1}$. $\blacksquare$
 ## Quick Check
 
 <Quiz
-  question="In any group G, what is the inverse of the product (a * b)?"
-  options={["a⁻¹ * b⁻¹", "b⁻¹ * a⁻¹", "a * b⁻¹", "b * a⁻¹"]}
-  answer={1}
-  explanation="(a * b)(b⁻¹ * a⁻¹) = a * (b * b⁻¹) * a⁻¹ = a * e * a⁻¹ = e. Order reverses, just like matrix inverses."
+  question={String.raw`What is the order of $(1\;2\;3)(4\;5)$ in $S_5$?`}
+  options={["$2^2$", "$3$", "$5$", "$6$"]}
+  answer={3}
+  explanation={String.raw`The order of a product of disjoint cycles is $\operatorname{lcm}(3, 2) = 6$.`}
 />

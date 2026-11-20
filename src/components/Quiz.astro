@@ -1,4 +1,6 @@
 ---
+import katex from 'katex';
+
 interface Props {
   question: string;
   options: string[];
@@ -7,6 +9,13 @@ interface Props {
 }
 
 const { question, options, answer, explanation } = Astro.props;
+
+// Converts inline $...$ segments into build-time KaTeX HTML
+function renderMath(text: string): string {
+  return text.replace(/\$([^$]+)\$/g, (_, tex) =>
+    katex.renderToString(tex, { throwOnError: false })
+  );
+}
 ---
 
 <quiz-card data-answer={answer}>
@@ -15,20 +24,25 @@ const { question, options, answer, explanation } = Astro.props;
     <button type="button" class="reset-btn" hidden>Reset</button>
   </div>
 
-  <p class="quiz-question">{question}</p>
+  <p class="quiz-question" set:html={renderMath(question)} />
 
   <div class="quiz-options">
     {options.map((opt, idx) => (
       <button type="button" class="opt-btn" data-index={idx}>
         <span class="opt-letter">{String.fromCharCode(65 + idx)}.</span>
-        <span>{opt}</span>
+        <span set:html={renderMath(opt)} />
       </button>
     ))}
   </div>
 
   <p class="quiz-feedback" hidden>
     <strong class="status"></strong>
-    {explanation && <span> — {explanation}</span>}
+    {explanation && (
+      <span>
+        {' — '}
+        <span set:html={renderMath(explanation)} />
+      </span>
+    )}
   </p>
 </quiz-card>
 
