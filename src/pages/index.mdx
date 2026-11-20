@@ -7,7 +7,7 @@ import Quiz from "../components/Quiz.astro";
 
 Representing orientation in 3D is useful across computing and engineering. The most intuitive approach uses **Euler angles**: three successive rotations about the coordinate axes.
 
-> **Definition (Euler Angles).** An orientation is described by three angles:
+> **Definition (Euler Angles):** An orientation is described by three angles:
 >
 > - **Yaw** $\alpha$ — rotation about the $z$-axis
 > - **Pitch** $\beta$ — rotation about the $y$-axis
@@ -82,7 +82,7 @@ Yaw $\alpha$ and roll $\gamma$ collapse into a **single** degree of freedom $\al
 
 Reordering the axes never fixes it: every Euler-angle convention has some singular pitch (or equivalent) where two axes align and a degree of freedom is lost.
 
-> **Takeaway.** As long as we encode 3D rotations with three Euler angles, gimbal lock is unavoidable. We need a different representation — ideally something that behaves more like a single, continuous object rather than a triple of angles.
+> **Takeaway:** As long as we encode 3D rotations with three Euler angles, gimbal lock is unavoidable. We need a different representation — ideally something that behaves more like a single, continuous object rather than a triple of angles.
 
 ## Quick Quiz
 

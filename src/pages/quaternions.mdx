@@ -7,7 +7,7 @@ import Quiz from "../components/Quiz.astro";
 
 Euler angles encode a rotation as three numbers and suffer from gimbal lock. Quaternions replace that triple with a single algebraic object — and give a clean map onto $SO(3)$.
 
-> **Definition (Quaternions).** The quaternions are the $4$-dimensional real algebra
+> **Definition (Quaternions):** The quaternions are the $4$-dimensional real algebra
 >
 > $$
 > \mathbb{H} = \{ a + bi + cj + dk : a,b,c,d \in \mathbb{R} \}
@@ -85,7 +85,7 @@ the group of orientation-preserving rotations of $\mathbb{R}^3$. Each element of
 
 Sending a unit quaternion $q$ to the rotation $r \mapsto qrq^{-1}$ gives a surjective homomorphism $U \to SO(3)$. Because $q$ and $-q$ map to the same rotation, the map is **2-to-1**: unit quaternions are a **double cover** of $SO(3)$.
 
-> **Takeaway.** Every 3D rotation corresponds to a pair $\{q,-q\}$ of unit quaternions. That double cover is why quaternions can track orientation continuously without the singularities of Euler angles.
+> **Takeaway:** Every 3D rotation corresponds to a pair $\{q,-q\}$ of unit quaternions. That double cover is why quaternions can track orientation continuously without the singularities of Euler angles.
 
 ## Quick Quiz
 
@@ -93,10 +93,10 @@ Sending a unit quaternion $q$ to the rotation $r \mapsto qrq^{-1}$ gives a surje
   question={String.raw`Why do unit quaternions form a double cover of $SO(3)$?`}
   options={[
     String.raw`Each rotation corresponds to exactly one quaternion`,
-    String.raw`$q$ and $-q$ induce the same conjugation map $r \mapsto qrq^{-1}$`,
     String.raw`Quaternion multiplication is commutative`,
     String.raw`$SO(3)$ has twice as many elements as $U$`,
+    String.raw`$q$ and $-q$ induce the same conjugation map $r \mapsto qrq^{-1}$`,
   ]}
-  answer={1}
+  answer={3}
   explanation={String.raw`$(-q)r(-q)^{-1} = qrq^{-1}$, so each rotation in $SO(3)$ has two unit-quaternion preimages $q$ and $-q$.`}
 />
