@@ -1,0 +1,5 @@
+name = "111a_learning_aid"
+compatibility_date = "2026-11-19"
+
+[assets]
+directory = "./dist"
