@@ -15,11 +15,11 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.google(),
-      name: "Source Serif 4",
+      name: "Atkinson Hyperlegible Next",
       cssVariable: "--font-serif",
       weights: [400, 600],
       styles: ["normal", "italic"],
-      fallbacks: ["Georgia", "serif"],
+      fallbacks: ["system-ui", "sans-serif"],
     },
     {
       provider: fontProviders.google(),

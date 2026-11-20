@@ -47,7 +47,7 @@ html {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-serif);
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
@@ -262,21 +262,6 @@ body {
   background: var(--surface);
   padding: 0.12em 0.35em;
   border: 1px solid var(--border);
-}
-
-/* === KaTeX Polish === */
-.katex .hline {
-  border-bottom-width: 1px !important;
-  border-bottom-style: solid !important;
-  border-bottom-color: currentColor !important;
-  min-width: 100%;
-}
-
-.katex-display {
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding: 0.4rem 0;
-  margin: 1.35rem 0;
 }
 
 /* === Page Footer === */

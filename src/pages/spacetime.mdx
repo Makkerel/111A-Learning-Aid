@@ -1,0 +1,83 @@
+---
+layout: ../layouts/NotesLayout.astro
+title: "Biquaternions & Spacetime"
+---
+
+import Quiz from "../components/Quiz.astro";
+
+Unit quaternions describe rotations in $\mathbb{R}^3$. Complexifying them lets the same algebra describe transformations of **spacetime**.
+
+> **Definition (Biquaternions).** The complexified quaternions are
+> $$
+> \mathbb{H}_{\mathbb{C}} = \mathbb{H} \otimes_{\mathbb{R}} \mathbb{C}
+> $$
+> Elements look like $q = a + b\mathbf{i} + c\mathbf{j} + d\mathbf{k}$ with $a,b,c,d \in \mathbb{C}$. The complex unit $\mathrm{i}$ commutes with $\mathbf{i},\mathbf{j},\mathbf{k}$.
+
+## Norm and Unit Group
+
+Quaternion conjugate and norm still make sense:
+$$
+\bar{q} = a - b\mathbf{i} - c\mathbf{j} - d\mathbf{k}
+\qquad
+N(q) = q\bar{q} = a^2 + b^2 + c^2 + d^2
+$$
+
+Now $N(q)$ need not be a nonnegative real, but multiplicativity survives: $N(pq) = N(p)N(q)$. The **complexified unit group** is
+$$
+U_{\mathbb{C}} = \{ q \in \mathbb{H}_{\mathbb{C}} : N(q) = 1 \}
+$$
+
+## Events in Spacetime
+
+An event becomes a complex quaternion
+$$
+X = ct + \mathrm{i}(x\mathbf{i} + y\mathbf{j} + z\mathbf{k})
+$$
+
+Its norm is the Minkowski interval:
+$$
+N(X) = c^2 t^2 - x^2 - y^2 - z^2
+$$
+
+Write $q^\dagger$ for quaternion conjugate plus complex conjugate. For $q \in U_{\mathbb{C}}$,
+$$
+X \longmapsto X' = q X q^\dagger
+$$
+preserves the interval: $N(X') = N(X)$.
+
+## Rotations and Boosts
+
+A real unit quaternion gives an ordinary spatial rotation. A complex one gives a **Lorentz boost**. For example,
+$$
+q_B = \exp\!\left(\frac{\eta}{2}\,\mathrm{i}\mathbf{k}\right)
+= \cosh\frac{\eta}{2} + \mathrm{i}\mathbf{k}\sinh\frac{\eta}{2}
+$$
+boosts along the $z$-axis with rapidity $\eta$:
+$$
+ct' = ct\cosh\eta + z\sinh\eta
+\qquad
+z' = ct\sinh\eta + z\cosh\eta
+$$
+(with $x'=x$, $y'=y$).
+
+Just as $U \to SO(3)$ was 2-to-1, here
+$$
+U_{\mathbb{C}}/\{\pm 1\} \cong SO^+(1,3)
+$$
+— a double cover of the proper orthochronous Lorentz group. Rotations and boosts live in one quaternionic package.
+
+> **Takeaway.** Complexify unit quaternions and the same conjugation trick that rotated $\mathbb{R}^3$ now preserves Minkowski spacetime — rotations and Lorentz boosts included.
+
+## Quick Quiz
+
+<Quiz
+  question={String.raw`What does $N(X) = c^2t^2 - x^2 - y^2 - z^2$ represent for an event $X$?`}
+  options={[
+    String.raw`The Euclidean length in $\mathbb{R}^3$`,
+    String.raw`The Minkowski spacetime interval`,
+    String.raw`The determinant of a boost matrix`,
+    String.raw`The rapidity $\eta$`,
+  ]}
+  answer={1}
+  explanation={String.raw`That quadratic form is exactly the Minkowski interval from the origin — what Lorentz transformations preserve.`}
+/>

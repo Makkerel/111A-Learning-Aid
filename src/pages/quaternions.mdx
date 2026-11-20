@@ -16,7 +16,7 @@ Euler angles encode a rotation as three numbers and suffer from gimbal lock. Qua
 > with basis $\{1,i,j,k\}$. Multiplication is determined by
 >
 > $$
-> i^2 = j^2 = k^2 = ijk = -1.
+> i^2 = j^2 = k^2 = ijk = -1
 > $$
 
 Real scalars commute with everything, but quaternion multiplication does **not**: $ij = k$ while $ji = -k$.
@@ -26,15 +26,15 @@ Real scalars commute with everything, but quaternion multiplication does **not**
 For $q = a + bi + cj + dk$:
 
 $$
-\overline{q} = a - bi - cj - dk,
+\overline{q} = a - bi - cj - dk
 \qquad
-|q| = \sqrt{a^2 + b^2 + c^2 + d^2}.
+|q| = \sqrt{a^2 + b^2 + c^2 + d^2}
 $$
 
 These satisfy $q\overline{q} = |q|^2$, so every nonzero quaternion has inverse
 
 $$
-q^{-1} = \frac{\overline{q}}{|q|^2}.
+q^{-1} = \frac{\overline{q}}{|q|^2}
 $$
 
 A useful consequence: $|pq| = |p||q|$.
@@ -56,19 +56,19 @@ In $\mathbb{C}$, a unit complex $z = e^{i\theta}$ rotates the plane by ordinary 
 In 3D the analogous move is **conjugation**. Identify a point of $\mathbb{R}^3$ with a pure imaginary quaternion $r = xi + yj + zk$. A unit quaternion $q$ rotates $r$ by
 
 $$
-r \mapsto qrq^{-1}.
+r \mapsto qrq^{-1}
 $$
 
 This preserves length:
 
 $$
-|qrq^{-1}| = |q||r||q^{-1}| = |r|.
+|qrq^{-1}| = |q||r||q^{-1}| = |r|
 $$
 
 Unlike the complex case, conjugation is insensitive to sign:
 
 $$
-(-q)\,r\,(-q)^{-1} = qrq^{-1}.
+(-q)\,r\,(-q)^{-1} = qrq^{-1}
 $$
 
 So $q$ and $-q$ define the **same** rotation.
@@ -78,7 +78,7 @@ So $q$ and $-q$ define the **same** rotation.
 Recall
 
 $$
-SO(3) = \{ P \in O_3 : \det(P) = 1 \},
+SO(3) = \{ P \in O_3 : \det(P) = 1 \}
 $$
 
 the group of orientation-preserving rotations of $\mathbb{R}^3$. Each element of $SO(3)$ is one unique rotation.
