@@ -1,13 +1,11 @@
 import { defineConfig, fontProviders } from "astro/config";
-import mdx from '@astrojs/mdx';
-import { unified } from '@astrojs/markdown-remark';
-import remarkMath from 'remark-math';
-import rehypeKatex from 'rehype-katex';
+import mdx from "@astrojs/mdx";
+import { unified } from "@astrojs/markdown-remark";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 
 export default defineConfig({
-  integrations: [
-    mdx(),
-  ],
+  integrations: [mdx()],
   markdown: {
     processor: unified({
       remarkPlugins: [remarkMath],
@@ -15,21 +13,21 @@ export default defineConfig({
     }),
   },
   fonts: [
-      {
-        provider: fontProviders.google(),
-        name: 'Source Serif 4',
-        cssVariable: '--font-serif',
-        weights: [400, 600],
-        styles: ['normal', 'italic'],
-        fallbacks: ['Georgia', 'serif'],
-      },
-      {
-        provider: fontProviders.google(),
-        name: 'IBM Plex Sans',
-        cssVariable: '--font-sans',
-        weights: [400, 500, 600],
-        styles: ['normal'],
-        fallbacks: ['system-ui', 'sans-serif'],
-      },
-    ],
+    {
+      provider: fontProviders.google(),
+      name: "Source Serif 4",
+      cssVariable: "--font-serif",
+      weights: [400, 600],
+      styles: ["normal", "italic"],
+      fallbacks: ["Georgia", "serif"],
+    },
+    {
+      provider: fontProviders.google(),
+      name: "IBM Plex Sans",
+      cssVariable: "--font-sans",
+      weights: [400, 500, 600],
+      styles: ["normal"],
+      fallbacks: ["system-ui", "sans-serif"],
+    },
+  ],
 });

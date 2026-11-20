@@ -95,7 +95,9 @@ body {
   padding: 0.35rem 0.75rem;
   border: 1px solid var(--border);
   background: transparent;
-  transition: background 0.12s ease, border-color 0.12s ease;
+  transition:
+    background 0.12s ease,
+    border-color 0.12s ease;
 }
 
 .site-nav a:hover {
