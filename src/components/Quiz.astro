@@ -1,0 +1,178 @@
+---
+interface Props {
+  question: string;
+  options: string[];
+  answer: number;
+  explanation?: string;
+}
+
+const { question, options, answer, explanation } = Astro.props;
+---
+
+<quiz-card data-answer={answer}>
+  <div class="quiz-header">
+    <span class="quiz-label">Concept Check</span>
+    <button type="button" class="reset-btn" hidden>Reset</button>
+  </div>
+
+  <p class="quiz-question">{question}</p>
+
+  <div class="quiz-options">
+    {options.map((opt, idx) => (
+      <button type="button" class="opt-btn" data-index={idx}>
+        <span class="opt-letter">{String.fromCharCode(65 + idx)}.</span>
+        <span>{opt}</span>
+      </button>
+    ))}
+  </div>
+
+  <p class="quiz-feedback" hidden>
+    <strong class="status"></strong>
+    {explanation && <span> — {explanation}</span>}
+  </p>
+</quiz-card>
+
+<script>
+  class QuizCard extends HTMLElement {
+    connectedCallback() {
+      const answer = Number(this.dataset.answer);
+      const buttons = this.querySelectorAll<HTMLButtonElement>('.opt-btn');
+      const resetBtn = this.querySelector<HTMLButtonElement>('.reset-btn')!;
+      const feedback = this.querySelector<HTMLElement>('.quiz-feedback')!;
+      const status = this.querySelector<HTMLElement>('.status')!;
+
+      buttons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const picked = Number(btn.dataset.index);
+
+          buttons.forEach((b, i) => {
+            b.disabled = true;
+            if (i === answer) b.classList.add('correct');
+            else if (i === picked) b.classList.add('wrong');
+          });
+
+          status.textContent = picked === answer ? 'Correct' : 'Incorrect';
+          feedback.hidden = false;
+          resetBtn.hidden = false;
+        });
+      });
+
+      resetBtn.addEventListener('click', () => {
+        buttons.forEach((b) => {
+          b.disabled = false;
+          b.classList.remove('correct', 'wrong');
+        });
+        feedback.hidden = true;
+        resetBtn.hidden = true;
+      });
+    }
+  }
+
+  if (!customElements.get('quiz-card')) {
+    customElements.define('quiz-card', QuizCard);
+  }
+</script>
+
+<style>
+  quiz-card {
+    display: block;
+    margin: 2rem 0;
+    padding: 1.25rem 1.35rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--border-strong);
+  }
+
+  .quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.65rem;
+  }
+
+  .quiz-label {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+  }
+
+  .reset-btn {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 0.15rem 0.5rem;
+    cursor: pointer;
+  }
+
+  .reset-btn:hover {
+    color: var(--text);
+    border-color: var(--border-strong);
+  }
+
+  .quiz-question {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    margin: 0 0 1rem;
+  }
+
+  .quiz-options {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .opt-btn {
+    display: flex;
+    gap: 0.6rem;
+    text-align: left;
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 0.6rem 0.85rem;
+    cursor: pointer;
+    transition: border-color 0.12s ease, background 0.12s ease;
+  }
+
+  .opt-letter {
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  .opt-btn:hover:not(:disabled) {
+    border-color: var(--border-strong);
+    background: var(--surface-hover);
+  }
+
+  .opt-btn:disabled {
+    cursor: default;
+  }
+
+  .opt-btn.correct {
+    border-color: var(--ok);
+    background: var(--ok-bg);
+  }
+
+  .opt-btn.wrong {
+    border-color: var(--err);
+    background: var(--err-bg);
+  }
+
+  .quiz-feedback {
+    margin: 1rem 0 0;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  .quiz-feedback .status {
+    color: var(--text);
+  }
+</style>

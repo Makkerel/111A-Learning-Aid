@@ -1,0 +1,278 @@
+/* === Color Palette (Warm Paper Light + Low-Glare Slate Dark) === */
+:root {
+  --bg: #faf9f6;
+  --surface: #f2f0ea;
+  --surface-hover: #e8e5dc;
+  --text: #1c1917;
+  --muted: #57534e;
+  --border: #d6d3cd;
+  --border-strong: #1c1917;
+  --accent: #1d4ed8;
+  --accent-bg: rgba(29, 78, 216, 0.06);
+  --ok: #15803d;
+  --ok-bg: rgba(21, 128, 61, 0.08);
+  --err: #b91c1c;
+  --err-bg: rgba(185, 28, 28, 0.08);
+
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141518;
+    --surface: #1b1d22;
+    --surface-hover: #23262e;
+    --text: #e6e4df;
+    --muted: #9a9892;
+    --border: #2e313a;
+    --border-strong: #e6e4df;
+    --accent: #7aa2f7;
+    --accent-bg: rgba(122, 162, 247, 0.09);
+    --ok: #4ade80;
+    --ok-bg: rgba(74, 222, 128, 0.1);
+    --err: #f87171;
+    --err-bg: rgba(248, 113, 113, 0.1);
+  }
+}
+
+/* === Base & Reset === */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  border-radius: 0; /* Enforce sharp corners everywhere */
+}
+
+html {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-serif);
+  font-size: 18px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  padding: 0 1.25rem 5rem;
+}
+
+/* === Reading Container === */
+.page-shell {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* === Top Navigation === */
+.site-header {
+  border-bottom: 2px solid var(--border-strong);
+  padding: 2rem 0 1.25rem;
+  margin-bottom: 2.75rem;
+}
+
+.site-title {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 0.9rem;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.site-nav a {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text);
+  text-decoration: none;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--border);
+  background: transparent;
+  transition: background 0.12s ease, border-color 0.12s ease;
+}
+
+.site-nav a:hover {
+  background: var(--surface);
+  border-color: var(--border-strong);
+}
+
+.site-nav a.active {
+  background: var(--border-strong);
+  color: var(--bg);
+  border-color: var(--border-strong);
+}
+
+/* === MDX Typography === */
+.prose h1,
+.prose h2,
+.prose h3 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--text);
+}
+
+.prose h1 {
+  font-size: 2rem;
+  margin: 0 0 1.5rem;
+}
+
+.prose h2 {
+  font-size: 1.35rem;
+  margin: 2.5rem 0 0.85rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.prose h3 {
+  font-size: 1.08rem;
+  margin: 1.75rem 0 0.5rem;
+}
+
+.prose p {
+  margin: 0 0 1.15rem;
+}
+
+.prose ul,
+.prose ol {
+  margin: 0 0 1.25rem;
+  padding-left: 1.4rem;
+}
+
+.prose li {
+  margin-bottom: 0.4rem;
+}
+
+.prose a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2.25rem 0;
+}
+
+/* === Definitions / Remarks (Markdown Blockquotes) === */
+.prose blockquote {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+}
+
+.prose blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+/* === Collapsible Theorem / Proof Boxes (<details>) === */
+.prose details {
+  margin: 1.5rem 0;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--border-strong);
+  background: var(--surface);
+}
+
+.prose details summary {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.85rem 1.15rem;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  user-select: none;
+}
+
+.prose details summary::-webkit-details-marker {
+  display: none;
+}
+
+.prose details summary::before {
+  content: "▸";
+  font-size: 0.85rem;
+  color: var(--accent);
+  transition: transform 0.15s ease;
+}
+
+.prose details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.prose details[open] summary {
+  border-bottom: 1px solid var(--border);
+}
+
+.prose details > :not(summary) {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+.prose details > :nth-child(2) {
+  margin-top: 1rem;
+}
+
+.prose details > :last-child {
+  margin-bottom: 1rem;
+}
+
+/* === Tables === */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+}
+
+.prose th,
+.prose td {
+  border: 1px solid var(--border);
+  padding: 0.55rem 0.75rem;
+  text-align: left;
+}
+
+.prose th {
+  background: var(--surface);
+  font-weight: 600;
+}
+
+/* === Code === */
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+  background: var(--surface);
+  padding: 0.12em 0.35em;
+  border: 1px solid var(--border);
+}
+
+/* === KaTeX Polish === */
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.4rem 0;
+  margin: 1.35rem 0;
+}
+
+/* === Page Footer === */
+.site-footer {
+  margin-top: 4rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  color: var(--muted);
+}

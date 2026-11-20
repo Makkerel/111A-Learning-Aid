@@ -1,0 +1,53 @@
+---
+import { Font } from 'astro:assets';
+import { ClientRouter } from 'astro:transitions';
+import 'katex/dist/katex.min.css';
+import '../styles/global.css';
+
+const { frontmatter } = Astro.props;
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+const navLinks = [
+  { href: '/', label: '1. Group Axioms' },
+  { href: '/subgroups', label: '2. Subgroups' },
+  { href: '/quotient-groups', label: '3. Quotient Groups' },
+];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{frontmatter.title} — MATH 111A</title>
+  <Font cssVariable="--font-serif" preload />
+  <Font cssVariable="--font-sans" preload />
+  <ClientRouter />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <p class="site-title">MATH 111A — Abstract Algebra</p>
+      <nav class="site-nav" aria-label="Topics">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class={currentPath === link.href ? 'active' : ''}
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+    </header>
+
+    <main class="prose" transition:animate="fade">
+      <h1>{frontmatter.title}</h1>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      Abstract Algebra Study Notes
+    </footer>
+  </div>
+</body>
+</html>

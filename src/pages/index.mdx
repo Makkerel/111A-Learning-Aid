@@ -1,0 +1,34 @@
+---
+layout: ../layouts/NotesLayout.astro
+title: "1. Group Axioms & First Properties"
+---
+
+import Quiz from "../components/Quiz.astro";
+
+> **Definition (Group).** A _group_ is a pair $(G, *)$ consisting of a set $G$ and a binary operation $*: G \times G \to G$ satisfying associativity, existence of an identity $e \in G$, and existence of inverses $a^{-1} \in G$ for every $a \in G$.
+
+## Uniqueness & Cancellation
+
+Even from just three axioms, we immediately get familiar algebraic rules like cancellation and unique inverses.
+
+<details>
+  <summary>Theorem: Uniqueness of Identity and Inverses</summary>
+
+**Proof (Identity):** Suppose $e$ and $e'$ are both identity elements in $G$. Then:
+$$e = e * e' = e'$$
+Hence the identity element is unique.
+
+**Proof (Inverses):** Suppose $b$ and $c$ are both inverses of $a \in G$. By associativity:
+$$b = b * e = b * (a * c) = (b * a) * c = e * c = c$$
+Therefore every element $a \in G$ has a unique inverse $a^{-1}$. $\blacksquare$
+
+</details>
+
+## Quick Check
+
+<Quiz
+  question="In any group G, what is the inverse of the product (a * b)?"
+  options={["a⁻¹ * b⁻¹", "b⁻¹ * a⁻¹", "a * b⁻¹", "b * a⁻¹"]}
+  answer={1}
+  explanation="(a * b)(b⁻¹ * a⁻¹) = a * (b * b⁻¹) * a⁻¹ = a * e * a⁻¹ = e. Order reverses, just like matrix inverses."
+/>
