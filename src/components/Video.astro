@@ -1,0 +1,49 @@
+---
+interface Props {
+  src: string;
+  caption: string;
+  title?: string;
+}
+
+const { src, caption, title } = Astro.props;
+---
+
+<figure class="video-figure">
+  <video
+    class="video-player"
+    src={src}
+    controls
+    playsinline
+    preload="metadata"
+    title={title}
+  >
+    Your browser does not support embedded video.
+  </video>
+  <figcaption class="video-caption">{caption}</figcaption>
+</figure>
+
+<style>
+  .video-figure {
+    margin: 1.75rem 0;
+    padding: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+
+  .video-player {
+    display: block;
+    width: 100%;
+    height: auto;
+    vertical-align: middle;
+  }
+
+  .video-caption {
+    margin: 0;
+    padding: 0.7rem 1rem;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+  }
+</style>

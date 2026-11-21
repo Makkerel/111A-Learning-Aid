@@ -10,9 +10,8 @@ interface Props {
 
 const { question, options, answer, explanation } = Astro.props;
 
-// Converts inline $...$ segments into build-time KaTeX HTML
 function renderMath(text: string): string {
-  return text.replace(/\$([^$]+)\$/g, (_, tex) =>
+  return text.replace(/\$(.+?)\$/g, (_, tex) =>
     katex.renderToString(tex, { throwOnError: false })
   );
 }
@@ -95,6 +94,7 @@ function renderMath(text: string): string {
     background: var(--surface);
     border: 1px solid var(--border);
     border-top: 2px solid var(--border-strong);
+    font-family: var(--font-sans);
   }
 
   .quiz-header {
@@ -105,7 +105,6 @@ function renderMath(text: string): string {
   }
 
   .quiz-label {
-    font-family: var(--font-sans);
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -114,7 +113,6 @@ function renderMath(text: string): string {
   }
 
   .reset-btn {
-    font-family: var(--font-sans);
     font-size: 0.78rem;
     background: transparent;
     color: var(--muted);
@@ -143,14 +141,13 @@ function renderMath(text: string): string {
     display: flex;
     gap: 0.6rem;
     text-align: left;
-    font-family: var(--font-sans);
     font-size: 0.92rem;
     background: var(--bg);
     color: var(--text);
     border: 1px solid var(--border);
     padding: 0.6rem 0.85rem;
     cursor: pointer;
-    transition: border-color 0.12s ease, background 0.12s ease;
+    transition: border-color 0.12s, background 0.12s;
   }
 
   .opt-letter {
@@ -181,7 +178,6 @@ function renderMath(text: string): string {
     margin: 1rem 0 0;
     padding-top: 0.75rem;
     border-top: 1px solid var(--border);
-    font-family: var(--font-sans);
     font-size: 0.9rem;
     color: var(--muted);
   }
