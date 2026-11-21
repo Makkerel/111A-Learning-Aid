@@ -1,0 +1,62 @@
+---
+interface Props {
+  /** YouTube video id, or a watch / youtu.be URL */
+  id: string;
+  caption: string;
+  title?: string;
+}
+
+const { id, caption, title = 'YouTube video' } = Astro.props;
+
+const videoId = id
+  .replace(/^https?:\/\/(?:(?:www\.)?youtube\.com\/watch\?v=|youtu\.be\/)/, '')
+  .replace(/[?&].*$/, '');
+
+const src = `https://www.youtube-nocookie.com/embed/${videoId}`;
+---
+
+<figure class="yt-figure">
+  <div class="yt-frame">
+    <iframe
+      src={src}
+      title={title}
+      loading="lazy"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+    />
+  </div>
+  <figcaption class="yt-caption">{caption}</figcaption>
+</figure>
+
+<style>
+  .yt-figure {
+    margin: 1.75rem 0;
+    border: 1px solid var(--border);
+  }
+
+  .yt-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+
+  .yt-frame iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .yt-caption {
+    margin: 0;
+    padding: 0.7rem 1rem;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: var(--muted);
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+  }
+</style>

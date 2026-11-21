@@ -4,6 +4,7 @@ title: "Quaternions"
 ---
 
 import Quiz from "../components/Quiz.astro";
+import YouTube from "../components/YouTube.astro";
 
 Euler angles encode a rotation as three numbers and suffer from gimbal lock. Quaternions replace that triple with a single algebraic object — and give a clean map onto $SO(3)$.
 
@@ -86,6 +87,16 @@ the group of orientation-preserving rotations of $\mathbb{R}^3$. Each element of
 Sending a unit quaternion $q$ to the rotation $r \mapsto qrq^{-1}$ gives a surjective homomorphism $U \to SO(3)$. Because $q$ and $-q$ map to the same rotation, the map is **2-to-1**: unit quaternions are a **double cover** of $SO(3)$.
 
 > **Takeaway:** Every 3D rotation corresponds to a pair $\{q,-q\}$ of unit quaternions. That double cover is why quaternions can track orientation continuously without the singularities of Euler angles.
+
+## Cool Visualization and More Info
+
+3Blue1Brown make a cool vidoe for visualizing quaternions.
+
+<YouTube
+  id="d4EgbgTm0Bg"
+  title="Visualizing quaternions"
+  caption="3Blue1Brown - Visualizing the 4d numbers Quaternions"
+/>
 
 ## Quick Quiz
 
