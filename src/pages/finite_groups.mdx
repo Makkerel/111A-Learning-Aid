@@ -2,6 +2,82 @@
 layout: ../layouts/NotesLayout.astro
 ---
 
-# Finite Groups of $SO(3)$
+import Quiz from "../components/Quiz.astro";
 
-Will have stuff soon!
+# Finite Subgroups of $SO(3)$
+
+Every finite subgroup of $O(2)$ is cyclic ($C_n$) or dihedral ($D_n$). Passing to 3D rotations $SO(3)$ adds only **three** new groups: $A_4$, $S_4$, and $A_5$ — the rotational symmetries of the Platonic solids.
+
+## Action on Poles
+
+Let $G \le SO(3)$ be finite of order $N$, acting on the unit sphere $\mathbb{S}^2$ by $g \cdot \mathbf{x} = g\mathbf{x}$.
+
+- **Euler's Lemma:** Every $g \in G \setminus \{1\}$ fixes exactly two antipodal points $\pm\mathbf{u} \in \mathbb{S}^2$.
+- **Poles:** $\mathbf{p} \in \mathbb{S}^2$ is a **pole** if $\operatorname{Stab}_G(\mathbf{p})$ is nontrivial. The set $P$ of all poles is finite.
+- **Orbits:** $G$ acts on $P$. On each orbit $O_i$, every pole has the same stabilizer size
+  $$
+  n_i = |\operatorname{Stab}_G(\mathbf{p})| = \frac{N}{|O_i|} \ge 2
+  $$
+
+## The Counting Equation
+
+> **Theorem.** If $G \le SO(3)$ is finite of order $N$ with pole-orbit stabilizer sizes $n_1, \dots, n_k$, then
+>
+> $$
+> 2\left(1 - \frac{1}{N}\right) = \sum_{i=1}^{k}\left(1 - \frac{1}{n_i}\right)
+> $$
+
+<details>
+  <summary>Proof idea (double counting)</summary>
+
+Count the set $\mathcal{S} = \{(g,\mathbf{p}) \in (G\setminus\{1\}) \times P : g\cdot\mathbf{p}=\mathbf{p}\}$ two ways.
+
+**By $g$:** Each of the $N-1$ non-identity elements fixes exactly $2$ poles, so $|\mathcal{S}| = 2(N-1)$.
+
+**By $\mathbf{p}$:** Each pole in $O_i$ is fixed by $n_i-1$ non-identity elements, so
+
+$$
+|\mathcal{S}|
+= \sum_{i=1}^{k}|O_i|(n_i-1)
+= \sum_{i=1}^{k}\frac{N}{n_i}(n_i-1)
+= N\sum_{i=1}^{k}\left(1-\frac{1}{n_i}\right)
+$$
+
+Equating and dividing by $N$ gives the theorem.
+
+</details>
+
+## Classification
+
+For $N=1$, $G \cong C_1$. For $N \ge 2$, the left side of the counting equation lies in $[1, 2)$, while each right-hand term lies in $[\tfrac12, 1)$. So there are only $k \in \{2,3\}$ orbits, and (assuming $n_1 \le \cdots \le n_k$) only five integer solutions:
+
+| $(n_1,\dots,n_k)$ | Order $N$ |    Group $G$     | Geometry                          |
+| :---------------: | :-------: | :--------------: | --------------------------------- |
+|      $(N,N)$      |    $N$    |      $C_N$       | Rotations about one axis          |
+|     $(2,2,m)$     |   $2m$    | $D_m$ ($m\ge 2$) | Regular $m$-gon in $\mathbb{R}^3$ |
+|     $(2,3,3)$     |   $12$    |      $A_4$       | Tetrahedron                       |
+|     $(2,3,4)$     |   $24$    |      $S_4$       | Cube / octahedron                 |
+|     $(2,3,5)$     |   $60$    |      $A_5$       | Dodecahedron / icosahedron        |
+
+> **Theorem (Classification).** Every finite subgroup of $SO(3)$ is isomorphic to $C_n$ ($n \ge 1$), $D_n$ ($n \ge 2$), $A_4$, $S_4$, or $A_5$.
+
+> **Takeaway.** Finite rotational symmetries in 3D are the familiar planar ones ($C_n$, $D_n$) plus exactly three Platonic leftovers: $A_4$, $S_4$, $A_5$.
+
+## Extra Resources
+
+Interactive animations of the Platonic rotational symmetries (UCL):
+
+<a href="https://www.homepages.ucl.ac.uk/~ucahjmt/groups/polyhedra/rotate_tetrahedron/index.html" target="_blank" rel="noopener noreferrer">Tetrahedron</a> — $A_4$
+
+<a href="https://www.homepages.ucl.ac.uk/~ucahjmt/groups/polyhedra/rotate_cube/index.html" target="_blank" rel="noopener noreferrer">Cube</a> — $S_4$ (same as the octahedron)
+
+<a href="https://www.homepages.ucl.ac.uk/~ucahjmt/groups/polyhedra/rotate_dodecahedron/index.html" target="_blank" rel="noopener noreferrer">Dodecahedron</a> — $A_5$ (same as the icosahedron)
+
+## Quick Quiz
+
+<Quiz
+  question={String.raw`Besides cyclic and dihedral groups, how many new isomorphism types appear as finite subgroups of $SO(3)$?`}
+  options={["$1$", "$2$", "$3$", "$5$"]}
+  answer={2}
+  explanation={String.raw`Only $A_4$, $S_4$, and $A_5$ — the rotational symmetry groups of the Platonic solids.`}
+/>
